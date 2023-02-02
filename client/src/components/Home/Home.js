@@ -1,20 +1,19 @@
 import React from 'react'
-import StpryList from '../StoryList'
 import StoryForm from '../StoryForm'
-import  {Layout} from 'antd'
-import Story from '../Story'
 import StoryList from '../StoryList'
+import  {Layout} from 'antd'
+import styles from './styles'
 
 const {Sider,Content}=Layout
 
 
 const Home = () => {
   return (
-    <Layout>
-        <Sider width={400}>
+    <Layout >
+        <Sider width={400} style={styles.sider}>
             <StoryForm/>
         </Sider>
-        <Content>
+        <Content style={styles.content}>
             <StoryList/>
         </Content>
     </Layout>
