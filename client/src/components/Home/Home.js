@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import StoryForm from '../StoryForm'
 import StoryList from '../StoryList'
 import  {Layout} from 'antd'
@@ -11,18 +11,20 @@ const {Sider,Content}=Layout
 
 const Home = () => {
   const dispatch=useDispatch()
-
+  const [selectedId,setSelectedId]=useState(null)
 
   useEffect(()=>{
     dispatch(getStories())
   },[dispatch])
+
+
   return (
     <Layout >
         <Sider width={400} style={styles.sider}>
-            <StoryForm/>
+            <StoryForm selectedId={selectedId} setSelectedId={setSelectedId}/>
         </Sider>
         <Content style={styles.content}>
-            <StoryList/>
+            <StoryList setSelectedId={setSelectedId}/>
         </Content>
     </Layout>
   )

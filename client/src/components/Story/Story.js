@@ -3,12 +3,16 @@ import styles from './styles'
 import { Card,Tooltip,Typography,Image } from 'antd'
 import {EditOutlined,DeleteTwoTone,HeartTwoTone} from '@ant-design/icons'
 import moment from 'moment'
+import { useDispatch } from 'react-redux'
+import { deleteStory } from '../../actions/stories'
 
 const {Meta}=Card
 const {Link,Paragraph,Text}=Typography
 
-const Story = ({story}) => {
+const Story = ({story,setSelectedId}) => {
   const [expand,setExpand]=useState(true)
+  const dispatch=useDispatch()
+
   return (
     <Card style={styles.card} 
       cover={<Image src={story.image}></Image>}
@@ -22,16 +26,16 @@ const Story = ({story}) => {
           </Tooltip >,
           <Tooltip placement='top' title='Edit' color='magenta'>
             <EditOutlined 
-            onClick={()=>{}
-
-            }/>
+            onClick={()=>{
+              setSelectedId(story._id)
+            }}/>
           </Tooltip>
         </div>,
         <Tooltip placement='top' title='Delete' color='red'>
           <DeleteTwoTone twoToneColor='red' 
-          onClick={()=>{}
-
-          }/>
+          onClick={()=>{
+            dispatch(deleteStory(story._id))
+          }}/>
         </Tooltip>
       ]}
     >
