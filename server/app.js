@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import storyRoutes from './routes/stories.js'
+import dotenv from 'dotenv'
 
 const app = express();
 mongoose.set("strictQuery", false);
@@ -10,11 +11,11 @@ app.use(bodyParser.json({ limit: "32mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "32mb", extended: true }));
 app.use(cors());
 app.use('/stories',storyRoutes)
-
+dotenv.config()
 
 const MONGO_URL =
-  "mongodb+srv://socialmediaalex:AbMBel576cNXkW4W@cluster0.5d5jnhi.mongodb.net/?retryWrites=true&w=majority";
-const PORT = process.env.PORT || 5001;
+  `mongodb+srv://${process.env.MONGO_URL_USER}:${process.env.MONGO_URL_PASS}@cluster0.5d5jnhi.mongodb.net/?retryWrites=true&w=majority`;
+const PORT = process.env.PORT;
 
 const connectDB = async () => {
   try {

@@ -14,7 +14,7 @@ const StoryForm = ({selectedId,setSelectedId}) => {
   const story= useSelector((state)=>selectedId ? state.stories.find((story)=>story._id===selectedId):null)  
   const [form] = Form.useForm()
   const dispatch= useDispatch()
-
+  
   const onSubmit = (formValues) => {
     selectedId? dispatch(updateStory(selectedId,formValues)) :
     dispatch(createStory(formValues))
@@ -23,7 +23,7 @@ const StoryForm = ({selectedId,setSelectedId}) => {
 
   useEffect(()=>{
     if(story){
-      form.setFieldValue(story)
+      form.setFieldsValue(story)
     }
   },[story,form])
 
@@ -59,7 +59,7 @@ const StoryForm = ({selectedId,setSelectedId}) => {
         </Item>
         <Item wrapperCol={{span:16,offset:6}}>
           <Button type='primary' block htmlType='submit'>
-            Share
+            {!selectedId?'Share':'Update'}
           </Button>
         </Item>
         {!selectedId?null:

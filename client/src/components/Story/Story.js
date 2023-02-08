@@ -4,7 +4,7 @@ import { Card,Tooltip,Typography,Image } from 'antd'
 import {EditOutlined,DeleteTwoTone,HeartTwoTone} from '@ant-design/icons'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
-import { deleteStory } from '../../actions/stories'
+import { deleteStory,likeStory } from '../../actions/stories'
 
 const {Meta}=Card
 const {Link,Paragraph,Text}=Typography
@@ -19,18 +19,18 @@ const Story = ({story,setSelectedId}) => {
       actions={[
         <div style={styles.actions}>
           <Tooltip placement='top' title='Like' color='magenta'
-          onClick={()=>{}}
+          onClick={()=>{dispatch(likeStory(story._id))}}
           >
             <HeartTwoTone twoToneColor='magenta' />
             &nbsp;{story.likes}&nbsp;
-          </Tooltip >,
-          <Tooltip placement='top' title='Edit' color='magenta'>
-            <EditOutlined 
-            onClick={()=>{
-              setSelectedId(story._id)
-            }}/>
-          </Tooltip>
+          </Tooltip >
         </div>,
+        <Tooltip placement='top' title='Edit' color='magenta'>
+          <EditOutlined 
+          onClick={()=>{
+            setSelectedId(story._id)
+          }}/>
+        </Tooltip>,
         <Tooltip placement='top' title='Delete' color='red'>
           <DeleteTwoTone twoToneColor='red' 
           onClick={()=>{

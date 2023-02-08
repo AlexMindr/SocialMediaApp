@@ -4,7 +4,6 @@ import Story from "../models/storyContent.js"
 const getStories = async  (req,res)=> {
     try {
         const story=await Story.find();
-        console.log(story)
    
     res.status(200).json(story)
    } catch (error) {
@@ -15,7 +14,11 @@ const getStories = async  (req,res)=> {
 }
 const createStory = async  (req,res)=> {
     const body= req.body;
-    const newStory= new Story({...body})
+    
+    const newStory= new Story({
+            ...body,
+            postDate: new Date().toISOString()
+        })
     try {
         await newStory.save()
         res.status(201).json(newStory)
@@ -48,4 +51,16 @@ const deleteStory = async (req,res) => {
     res.status(201).json({message:"Story deleted successfuly"})
 }
 
-export {getStories,createStory,updateStory,deleteStory}
+const likeStory = async (req,res) => {
+    const {id:_id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(_id)){
+        return res.status(404).send("This id doesn't belong to any story")
+    }
+
+    const story= await Story.findById(_id)
+    const updatedStory = await Story.findByIdAndUpdate(_id, {likes:story.likes +1}, {new:true})
+
+    res.status(201).json(updatedStory)
+}
+
+export {getStories,createStory,updateStory,deleteStory,likeStory}
