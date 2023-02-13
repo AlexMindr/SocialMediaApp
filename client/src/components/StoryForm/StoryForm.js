@@ -4,6 +4,7 @@ import {Card, Form, Input, Typography, Button} from 'antd'
 import FileBase64 from 'react-file-base64'
 import { useDispatch,useSelector } from 'react-redux'
 import {createStory,updateStory} from '../../actions/stories'
+import {Link} from 'react-router-dom'
 
 const {Title} = Typography
 const {Item} = Form
@@ -14,10 +15,12 @@ const StoryForm = ({selectedId,setSelectedId}) => {
   const story= useSelector((state)=>selectedId ? state.stories.find((story)=>story._id===selectedId):null)  
   const [form] = Form.useForm()
   const dispatch= useDispatch()
-  
+  const user = JSON.parse(localStorage.getItem("profile"))
+  const username = user?.result?.username
+
   const onSubmit = (formValues) => {
-    selectedId? dispatch(updateStory(selectedId,formValues)) :
-    dispatch(createStory(formValues))
+    selectedId? dispatch(updateStory(selectedId,{...formValues, username})) :
+    dispatch(createStory({...formValues, username}))
     reset()
   }
 
@@ -32,6 +35,19 @@ const StoryForm = ({selectedId,setSelectedId}) => {
     setSelectedId(null)
   }
 
+  if(!user){
+    return (
+      <Card style={styles.formCard}>
+        <Title level={4}>
+          <span style={styles.formTitle}>
+            Welcome to Instaverse!
+          </span>
+          <br/>
+          Please <Link to='/authform'> login </Link> or <Link to='/authform'> register </Link> to create a story.
+        </Title>
+      </Card>
+    )
+  }
   return (
     <Card style={styles.formCard} title={
       <Title level={4} style={styles.formTitle}>
@@ -41,9 +57,6 @@ const StoryForm = ({selectedId,setSelectedId}) => {
       <Form 
         form={form} labelCol={{span:6}} wrapperCol={{span:16}} layout='horizontal' size='middle' onFinish={onSubmit}
       >
-        <Item name='username' label='Username' rules={[{required:true}]} >
-          <Input  allowClear/>
-        </Item>
         <Item name='caption' label='Caption' rules={[{required:true}]}>
           <Input.TextArea autoSize={{minRows:2,maxRows:6}} allowClear/>
         </Item>

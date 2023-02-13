@@ -7,7 +7,7 @@ export const signup = (formValues,navigate)=>async (dispatch) =>{
         dispatch({type:AUTH,payload: data})
         navigate('/')
     } catch (error) {
-        console.log(error.message)
+        console.log(error.response.data)
     }
     
 }
@@ -15,6 +15,7 @@ export const signup = (formValues,navigate)=>async (dispatch) =>{
 export const login = (formValues,navigate)=>async (dispatch) =>{
     try {
         const {data}= await api.login(formValues)
+        console.log(data,1)
         dispatch({type:AUTH,payload: data})
         navigate('/')
     } catch (error) {

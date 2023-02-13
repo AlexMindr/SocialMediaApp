@@ -1,15 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect,useCallback } from 'react'
 import {Layout,Image,Typography,Button,Avatar} from 'antd'
 import Logo from '../../images/Insta.png'
 import styles from './styles'
-import {Link} from 'react-router-dom'
+import decode from 'jwt-decode'
+import {Link, useNavigate,useLocation} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import { LOGOUT } from '../../constants/actionTypes'
+
 
 const {Title} =Typography
 const {Header} =Layout
 
 
 const AppBar = () => {
-    const user = null
+    const [user,setUser]= useState(JSON.parse(localStorage.getItem("profile")))
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const logout =useCallback( () =>{
+        dispatch({type:LOGOUT})
+        navigate("/authform")
+        setUser(null)
+    },[dispatch,navigate])
+    
+
+    useEffect(()=>{
+        const token = user?.token 
+        if(token){
+            const decodedToken= decode(token)
+            if(decodedToken.exp*1000<new Date().getTime()) {
+                logout()
+            }
+        }   
+        setUser(JSON.parse(localStorage.getItem("profile")))    
+    },[location,user?.token,logout])
+
+    
 
     return (
     <Header style={styles.header}>
@@ -29,12 +56,12 @@ const AppBar = () => {
         ):(
             <div style={styles.userInfo}>
                 <Avatar style={styles.avatar} alt='username' size='large'>
-                    User
+                    {user?.result?.username?.charAt(0).toUpperCase()}
                 </Avatar>
                 <Title style={styles.title} level={4}>
-                    John D
+                    {user?.result?.username}
                 </Title>
-                <Button htmlType='button'>
+                <Button htmlType='button' onClick={logout}>
                     Logout
                 </Button>
             </div>

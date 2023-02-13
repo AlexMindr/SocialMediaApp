@@ -12,7 +12,6 @@ const {Item} = Form
 
 
 const AuthForm = () => {
-    const user=null
     const [form]=Form.useForm()
     const [isLogin,setIsLogin]= useState(true)
     const navigate=useNavigate()
@@ -54,7 +53,7 @@ const AuthForm = () => {
                 </Item>
                 {isLogin || (
                 <>  
-                    <Item name='cofirmPassword' rules={[{required:true,message:"Please repeat your password"}]}>
+                    <Item name='confirmPassword' rules={[{required:true,message:"Please repeat your password"}]}>
                         <Input.Password type='password' prefix={<LockOutlined/>} placeholder='Confirm Password' />
                     </Item>
                 </>

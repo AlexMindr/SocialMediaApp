@@ -8,23 +8,19 @@ const storySchema= mongoose.Schema({
         type:String,
         required:true,
     },
-    // userId:{
-    //     type:String,
-    //     required:true,
-    // },
+    userId:{
+        type:String,
+        required:true,
+    },
     image:{
         type:String,
         required:true,
     },
     tags:String,
     likes:{
-        type:Number,
-        default:0,
+        type:[String],
+        default:[],
     },
-    // likes:{
-    //     type:Number,
-    //     default:0,
-    // },
     postDate:{
         type:Date,
         default:new Date()
