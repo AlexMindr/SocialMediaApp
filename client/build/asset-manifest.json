@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.c7a1c9fd.js",
+    "static/media/Insta.png": "/static/media/Insta.0f4ac1a042aa5b58d7cd.png",
+    "index.html": "/index.html",
+    "main.c7a1c9fd.js.map": "/static/js/main.c7a1c9fd.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.c7a1c9fd.js"
+  ]
+}
