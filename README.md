@@ -20,11 +20,11 @@ Other technologies/libraries used:
 
 ##### Login/Register page
 
-![Login](_readmeimg/login.png)
+![Login](_readmeimg/login.PNG)
 
 ##### Guest view
 
-![Guest](_readmeimg/guest.png)
+![Guest](/_readmeimg/guest.png)
 
 ##### Logged user view
 
