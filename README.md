@@ -20,15 +20,31 @@ Other technologies/libraries used:
 
 ##### Login/Register page
 
+On the login page the users can register or login into the app by completing a form.
+
 ![Login](_readmeimg/login.PNG)
 
 ##### Guest view
 
-![Guest](/_readmeimg/guest.png)
+Guests can only view the posts.
+
+![Guest](_readmeimg/guest.PNG)
 
 ##### Logged user view
 
-![User](_readmeimg/user.png)
+A user can logout by clicking on the top right button of the page.
+
+Logged users can make new posts or update information of existing ones by using the form in the right side of the page.
+
+They can also see which posts they have already liked (and unlike them if they choose to), like other posts and see their number or likes
+
+![User](_readmeimg/user.PNG)
+
+##### Logged user post view
+
+The logged user can initialise the editing form by clicking on an owned post middle icon or delete their post by clicking on the right icon.
+
+![Post](_readmeimg/post.PNG)
 
 ### What I learned?
 
